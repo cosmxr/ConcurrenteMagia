@@ -1,28 +1,41 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>Hechizos</title>
+  <title>Spells</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 20px; }
+    h1 { color: #333; }
+    .container { max-width: 800px; margin: 0 auto; }
+    .btn { padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
+    th { background-color: #f2f2f2; }
+    tr:hover { background-color: #f1f1f1; }
+    .actions a { margin-right: 10px; color: #f44336; text-decoration: none; }
+  </style>
 </head>
 <body>
-<h1>Hechizos</h1>
-<a th:href="@{/spells/new}">Añade nuevo hechizo</a>
-<table>
-  <thead>
-  <tr>
-    <th>Nombre</th>
-    <th>Descripción</th>
-    <th>Acciones</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr th:each="spell : ${spells}">
-    <td th:text="${spell.name}">Introduce nombre</td>
-    <td th:text="${spell.description}">Introduce descripción</td>
-    <td>
-      <a th:href="@{/spells/delete/{id}(id=${spell.id})}">Borrar</a>
-    </td>
-  </tr>
-  </tbody>
-</table>
+<div class="container">
+  <h1>Hechizos</h1>
+  <a class="btn" th:href="@{/spells/new}">Añadir nuevo hechizo</a>
+  <table>
+    <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Descripción</th>
+      <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="spell : ${spells}">
+      <td th:text="${spell.name}">Introduce nombre</td>
+      <td th:text="${spell.description}">Introduce descripción</td>
+      <td class="actions">
+        <a th:href="@{/spells/delete/{id}(id=${spell.id})}">Borrar</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
 </body>
 </html>
