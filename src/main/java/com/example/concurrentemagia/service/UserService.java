@@ -21,7 +21,7 @@ public class UserService implements UserDetailsService {
 
     public void save(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRole("ROLE_USER");
+        user.setRole("USER"); // Remove the "ROLE_" prefix
         userRepository.save(user);
     }
 
@@ -38,7 +38,7 @@ public class UserService implements UserDetailsService {
         return org.springframework.security.core.userdetails.User
                 .withUsername(user.getUsername())
                 .password(user.getPassword())
-                .roles(user.getRole())
+                .roles(user.getRole()) // Spring Security will automatically add the "ROLE_" prefix
                 .build();
     }
 }

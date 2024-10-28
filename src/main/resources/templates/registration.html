@@ -8,11 +8,11 @@
 <form th:action="@{/registration}" th:object="${user}" method="post">
     <div>
         <label>Username:</label>
-        <input type="text" th:field="*{username}"/>
+        <input type="text" th:field="*{username}" required/>
     </div>
     <div>
         <label>Password:</label>
-        <input type="password" th:field="*{password}"/>
+        <input type="password" th:field="*{password}" required/>
     </div>
     <div>
         <button type="submit">Register</button>
