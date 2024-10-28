@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Hechizos</title>
+</head>
+<body>
+<h1>Hechizos</h1>
+<a th:href="@{/spells/new}">Añade nuevo hechizo</a>
+<table>
+  <thead>
+  <tr>
+    <th>Nombre</th>
+    <th>Descripción</th>
+    <th>Acciones</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="spell : ${spells}">
+    <td th:text="${spell.name}">Introduce nombre</td>
+    <td th:text="${spell.description}">Introduce descripción</td>
+    <td>
+      <a th:href="@{/spells/delete/{id}(id=${spell.id})}">Borrar</a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>

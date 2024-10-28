@@ -1,0 +1,11 @@
+2024-10-28 12:02:06.559648+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "user" not found (this database is empty); SQL statement:
+insert into "user" (password,role,username,id) values (?,?,?,default) [42104-224]
+2024-10-28 12:31:32.248060+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "spells" no encontrada
+Table "spells" not found; SQL statement:
+select * from "spells" [42102-224]
+2024-10-28 12:43:36.318007+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "spells" no encontrada
+Table "spells" not found; SQL statement:
+select * from "spells" [42102-224]

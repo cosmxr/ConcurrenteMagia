@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Añade hechizo</title>
+</head>
+<body>
+<h1>Añade hechizo</h1>
+<form th:action="@{/spells}" th:object="${spell}" method="post">
+    <div>
+        <label>Nombre:</label>
+        <input type="text" th:field="*{name}" required/>
+    </div>
+    <div>
+        <label>Descripción:</label>
+        <input type="text" th:field="*{description}" required/>
+    </div>
+    <div>
+        <button type="submit">Guardar</button>
+    </div>
+</form>
+</body>
+</html>

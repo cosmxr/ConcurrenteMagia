@@ -1,10 +1,28 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Home</title>
+    <title>Maneja tus Hechizos</title>
 </head>
 <body>
-<h1>Welcome Home</h1>
-<p>You have successfully logged in.</p>
+<h1>Manejador de hechizos</h1>
+<a th:href="@{/spells/new}">Añade un nuevo hehchizo</a>
+<table>
+    <thead>
+    <tr>
+        <th>Nombre</th>
+        <th>Descripción</th>
+        <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="spell : ${spells}">
+        <td th:text="${spell.name}">Nombre hechizo</td>
+        <td th:text="${spell.description}">Descripcion hechizo</td>
+        <td>
+            <a th:href="@{/spells/delete/{id}(id=${spell.id})}">Borrar</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>
