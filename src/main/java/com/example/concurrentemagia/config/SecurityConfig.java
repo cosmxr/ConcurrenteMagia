@@ -12,18 +12,22 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+//Clase de configuración para la seguridad de la aplicación
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
+    //Inyección de dependencias de la clase 'UserService' y 'PasswordEncoder'
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
 
+    //Constructor de la clase
     public SecurityConfig(UserService userService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
     }
 
+    //Bean para la configuración de la seguridad de la aplicación
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable())
@@ -47,6 +51,7 @@ public class SecurityConfig {
         return http.build();
     }
 
+    //Metodo para la configuración de la autenticación de la aplicación
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userService).passwordEncoder(passwordEncoder);

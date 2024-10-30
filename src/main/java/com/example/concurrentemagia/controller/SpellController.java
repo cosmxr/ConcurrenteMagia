@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+//Controlador para la página de hechizos
 @Controller
 @RequestMapping("/spells")
 public class SpellController {
