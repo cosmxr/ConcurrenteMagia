@@ -9,3 +9,48 @@ select * from "spells" [42102-224]
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "spells" no encontrada
 Table "spells" not found; SQL statement:
 select * from "spells" [42102-224]
+2024-10-30 19:51:33.190484+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "spells\000d\000a" no encontrada
+Table "spells\000d\000a" not found; SQL statement:
+select * from "spells
+" [42102-224]
+2024-10-30 19:51:38.149405+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "spells" no encontrada
+Table "spells" not found; SQL statement:
+select * from "spells" [42102-224]
+2024-10-30 19:51:43.350076+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "SPELLS" no encontrada
+Table "SPELLS" not found; SQL statement:
+select * from spells [42102-224]
+2024-10-30 19:51:58.641068+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "[*]spells"; se esperaba "SAVEPOINT, SCRIPT, SHUTDOWN"
+Syntax error in SQL statement "[*]spells"; expected "SAVEPOINT, SCRIPT, SHUTDOWN"; SQL statement:
+spells [42001-224]
+2024-10-30 19:53:15.878999+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "spells" no encontrada
+Table "spells" not found; SQL statement:
+select * from "spells" [42102-224]
+2024-10-30 19:53:31.606303+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "SPELLS" no encontrada
+Table "SPELLS" not found; SQL statement:
+select * from spells [42102-224]
+2024-10-30 19:53:53.895803+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "SPELLS" no encontrada
+Table "SPELLS" not found; SQL statement:
+select * from spells [42102-224]
+2024-10-30 19:53:54.510391+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "SPELLS" no encontrada
+Table "SPELLS" not found; SQL statement:
+select * from spells [42102-224]
+2024-10-30 19:53:54.713903+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "SPELLS" no encontrada
+Table "SPELLS" not found; SQL statement:
+select * from spells [42102-224]
+2024-10-30 19:54:18.996403+01:00 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "SPELLS" no encontrada
+Table "SPELLS" not found; SQL statement:
+select * from spells [42102-224]
+2024-10-30 19:54:20.920056+01:00 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "SPELLS" no encontrada
+Table "SPELLS" not found; SQL statement:
+select * from spells [42102-224]

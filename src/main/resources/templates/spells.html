@@ -23,6 +23,7 @@
     <tr>
       <th>Nombre</th>
       <th>Descripción</th>
+      <th>Tipo</th>
       <th>Acciones</th>
     </tr>
     </thead>
@@ -30,6 +31,7 @@
     <tr th:each="spell : ${spells}">
       <td th:text="${spell.name}">Introduce nombre</td>
       <td th:text="${spell.description}">Introduce descripción</td>
+      <td th:text="${spell.type}">Introduce tipo</td>
       <td class="actions">
         <a th:href="@{/spells/delete/{id}(id=${spell.id})}">Borrar</a>
       </td>

@@ -1,9 +1,6 @@
 package com.example.concurrentemagia.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 //entidad de hechizos
 @Entity
@@ -14,6 +11,9 @@ public class Spell {
 
     private String name;
     private String description;
+
+    @Enumerated(EnumType.STRING)
+    private SpellType type;
 
     public Long getId() {
         return id;
@@ -37,5 +37,13 @@ public class Spell {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public SpellType getType() {
+        return type;
+    }
+
+    public void setType(SpellType type) {
+        this.type = type;
     }
 }
