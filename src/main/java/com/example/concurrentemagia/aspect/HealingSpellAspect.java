@@ -19,7 +19,7 @@ public class HealingSpellAspect {
     @AfterReturning(pointcut = "saveSpell(spell)", returning = "result")
     public void logHealingSpell(Spell spell, Object result) {
         if (spell.getType() == SpellType.HEALING) {
-            System.out.println("A spell of type 'HEALING' was saved: " + spell.getName());
+            System.out.println("Hechizo del tipo 'HEALING' ha sido añadido: " + spell.getName());
         }
     }
 }

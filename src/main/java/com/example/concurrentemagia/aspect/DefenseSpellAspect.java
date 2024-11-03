@@ -19,7 +19,7 @@ public class DefenseSpellAspect {
     @AfterReturning(pointcut = "saveSpell(spell)", returning = "result")
     public void logDefenseSpell(Spell spell, Object result) {
         if (spell.getType() == SpellType.DEFENSE) {
-            System.out.println("A spell of type 'DEFENSE' was saved: " + spell.getName());
+            System.out.println("Hechizo del tipo 'DEFENSE' ha sido añadido: " + spell.getName());
         }
     }
 }

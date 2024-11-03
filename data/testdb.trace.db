@@ -1665,3 +1665,7 @@ select me1_0.id,me1_0.attack_points,me1_0.challenger_health,me1_0.defense_percen
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
+2024-11-03 18:36:58.408290+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "MAGIC_EVENT" no encontrada
+Table "MAGIC_EVENT" not found; SQL statement:
+select * from magic_event [42102-224]

@@ -16,6 +16,6 @@ public class SpellLoggingAspect {
 
     @After("deleteSpell()")
     public void logDeleteSpell() {
-        System.out.println("A spell was deleted.");
+        System.out.println("Hechizo ha sido eliminado.");
     }
 }

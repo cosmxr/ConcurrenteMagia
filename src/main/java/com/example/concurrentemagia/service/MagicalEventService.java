@@ -3,6 +3,7 @@ package com.example.concurrentemagia.service;
 import com.example.concurrentemagia.model.MagicalEvent;
 import com.example.concurrentemagia.model.Spell;
 import com.example.concurrentemagia.repository.MagicalEventRepository;
+import com.example.concurrentemagia.repository.SpellRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,9 +12,11 @@ import java.util.List;
 public class MagicalEventService {
 
     private final MagicalEventRepository magicalEventRepository;
+    private final SpellRepository spellRepository;
 
-    public MagicalEventService(MagicalEventRepository magicalEventRepository) {
+    public MagicalEventService(MagicalEventRepository magicalEventRepository, SpellRepository spellRepository) {
         this.magicalEventRepository = magicalEventRepository;
+        this.spellRepository = spellRepository;
     }
 
     public void save(MagicalEvent event) {
@@ -21,15 +24,21 @@ public class MagicalEventService {
         magicalEventRepository.save(event);
     }
 
+    public MagicalEvent findById(Long id) {
+        return magicalEventRepository.findById(id).orElse(null);
+    }
+    public List<Spell> getAllSpells() {
+        return spellRepository.findAll();
+    }
     public List<MagicalEvent> getAllEvents() {
         return magicalEventRepository.findAll();
     }
 
     public MagicalEvent getCurrentEvent() {
-        return magicalEventRepository.findAll().get(0); // Example implementation
+       return findById(10L);
     }
 
-    public void applySpell(MagicalEvent event, Spell spell) {
+    public String applySpell(MagicalEvent event, Spell spell) {
         if (event.getTurn() % 2 == 0) { // User's turn
             switch (spell.getType()) {
                 case ATTACK:
@@ -48,8 +57,45 @@ public class MagicalEventService {
             event.setUserHealth(event.getUserHealth() - event.getAttackPoints());
         }
         event.setTurn(event.getTurn() + 1);
+
+        if (event.getChallengerHealth() <= 0) {
+            if (event.getLevel() == 3){
+                return "finalVictory";
+            }
+            advanceToNextLevel(event);
+            save(event);
+            return "victory";
+        } else if (event.getUserHealth() <= 0) {
+            event.setLevel(-1); // Indicate defeat
+            save(event);
+            return "defeat";
+        }
+
         save(event);
+        return "challenge";
     }
+
+    private void advanceToNextLevel(MagicalEvent event) {
+        switch (event.getLevel()) {
+            case 1:
+                event.setLevel(2);
+                event.setChallengerHealth(200); // Reset health for the next challenger
+                event.setName("Troll");
+                break;
+            case 2:
+                event.setLevel(3);
+                event.setChallengerHealth(300); // Reset health for the next challenger
+                event.setName("Dragon");
+                break;
+            case 3:
+                event.setLevel(4); // Indicate final victory
+                break;
+            default:
+                break;
+        }
+        event.setTurn(1); // Reset turn counter
+    }
+
     private void validateMagicalEvent(MagicalEvent event) {
         if (event.getName() == null || event.getName().isEmpty()) {
             throw new IllegalArgumentException("Event name cannot be empty");

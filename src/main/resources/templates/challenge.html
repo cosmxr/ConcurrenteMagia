@@ -4,14 +4,14 @@
     <title>Challenge</title>
 </head>
 <body>
-<h1>Magical Event</h1>
+<h1>Evento Mágico</h1>
 <div th:if="${event != null}">
-    <h2 th:text="${event.name}">Event Name</h2>
-    <p th:text="${event.description}">Event Description</p>
-    <p>Challenger Health: <span th:text="${event.challengerHealth}">100</span></p>
-    <p>User Health: <span th:text="${event.userHealth}">100</span></p>
+    <h2 th:text="${event.name}">Nombre Evento</h2>
+    <p th:text="${event.description}">Descripción Evento</p>
+    <p>Salud Oponente: <span th:text="${event.challengerHealth}">100</span></p>
+    <p>Salud Jugador: <span th:text="${event.userHealth}">100</span></p>
     <div>
-        <h3>Spells</h3>
+        <h3>Hechizos</h3>
         <div th:each="spell : ${spells}">
             <form th:action="@{/events/useSpell}" method="post">
                 <input type="hidden" name="spellId" th:value="${spell.id}"/>

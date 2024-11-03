@@ -19,7 +19,7 @@ public class AttackSpellAspect {
     @AfterReturning(pointcut = "saveSpell(spell)", returning = "result")
     public void logAttackSpell(Spell spell, Object result) {
         if (spell.getType() == SpellType.ATTACK) {
-            System.out.println("A spell of type 'ATTACK' was saved: " + spell.getName());
+            System.out.println("Hechizo del tipo 'ATTACK' ha sido añadido: " + spell.getName());
         }
     }
 }

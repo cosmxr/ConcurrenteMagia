@@ -9,8 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-// src/main/java/com/example/concurrentemagia/controller/MagicalEventController.java
-
 @Controller
 @RequestMapping("/events")
 public class MagicalEventController {
@@ -33,6 +31,7 @@ public class MagicalEventController {
         magicalEventService.save(event);
         return "redirect:/events";
     }
+
     @GetMapping("/challenge")
     public String challenge(Model model) {
         model.addAttribute("event", magicalEventService.getCurrentEvent());
@@ -45,8 +44,24 @@ public class MagicalEventController {
         Spell spell = spellService.findById(spellId);
         MagicalEvent event = magicalEventService.getCurrentEvent();
         magicalEventService.applySpell(event, spell);
+        String result = magicalEventService.applySpell(event, spell);
+
         model.addAttribute("event", event);
-        model.addAttribute("spells", spellService.findAll());
-        return "challenge"; // Return to the challenge view
+        model.addAttribute("spells", magicalEventService.getAllSpells());
+
+        switch (result) {
+            case "victory":
+                model.addAttribute("message", "Has Ganado!");
+                return "victory";
+            case "defeat":
+                model.addAttribute("message", "Has sido derrotado!");
+                return "defeat";
+            case "finalVictory":
+                model.addAttribute("message","Has ganado al final Boss!!");
+                return "final.Victory";
+
+            default:
+                return "challenge";
+        }
     }
 }

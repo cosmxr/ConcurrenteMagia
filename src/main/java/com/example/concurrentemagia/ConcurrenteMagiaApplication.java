@@ -21,41 +21,40 @@ public class ConcurrenteMagiaApplication {
     @Bean
     public CommandLineRunner init() {
         return args -> {
-            createMagicalEvents();
+            resetMagicalEvents();
         };
     }
 
-    private void createMagicalEvents() {
-        if (magicalEventService.getAllEvents().isEmpty()) {
-            MagicalEvent event1 = new MagicalEvent();
-            event1.setName("Duel with a wizard");
-            event1.setDescription("Level 1: Duel with a wizard.");
-            event1.setChallengerHealth(100);
-            event1.setUserHealth(100);
-            event1.setLevel(1);
-            event1.setAttackPoints(10);
-            event1.setDefensePercentage(10);
-            magicalEventService.save(event1);
-
-            MagicalEvent event2 = new MagicalEvent();
-            event2.setName("Battle with a troll");
-            event2.setDescription("Level 2: Battle with a troll.");
-            event2.setChallengerHealth(200);
-            event2.setUserHealth(100);
-            event2.setLevel(2);
-            event2.setAttackPoints(20);
-            event2.setDefensePercentage(20);
-            magicalEventService.save(event2);
-
-            MagicalEvent event3 = new MagicalEvent();
-            event3.setName("Fight a dragon");
-            event3.setDescription("Level 3: Fight a dragon.");
-            event3.setChallengerHealth(300);
-            event3.setUserHealth(100);
-            event3.setLevel(3);
-            event3.setAttackPoints(30);
-            event3.setDefensePercentage(30);
-            magicalEventService.save(event3);
+    private void resetMagicalEvents() {
+        MagicalEvent wizard = magicalEventService.findById(10L);
+        if (wizard != null) {
+            wizard.setUserHealth(100); // Reset user health
+            wizard.setChallengerHealth(100); // Reset challenger health
+            wizard.setTurn(1); // Reset turn counter
+            wizard.setLevel(1); // Set level to 1
+            wizard.setDefensePercentage(15); // Set defense percentage to 15
+            wizard.setAttackPoints(10); // Set attack points to 10
+            magicalEventService.save(wizard);
+        }
+        MagicalEvent troll = magicalEventService.findById(8L);
+        if (troll != null) {
+            troll.setUserHealth(100); // Reset user health
+            troll.setChallengerHealth(200); // Reset challenger health
+            troll.setTurn(1); // Reset turn counter
+            troll.setLevel(2); // Set level to 1
+            troll.setDefensePercentage(25); // Set defense percentage to 15
+            troll.setAttackPoints(20); // Set attack points to 10
+            magicalEventService.save(troll);
+        }
+        MagicalEvent dragon = magicalEventService.findById(9L);
+        if (dragon != null) {
+            dragon.setUserHealth(100); // Reset user health
+            dragon.setChallengerHealth(300); // Reset challenger health
+            dragon.setTurn(1); // Reset turn counter
+            dragon.setLevel(3); // Set level to 1
+            dragon.setDefensePercentage(35); // Set defense percentage to 15
+            dragon.setAttackPoints(30); // Set attack points to 10
+            magicalEventService.save(dragon);
         }
     }
 }
