@@ -93,7 +93,7 @@ public class MagicalEventService {
             default:
                 break;
         }
-        event.setTurn(1); // Reset turn counter
+        event.setTurn(1);
     }
 
     private void validateMagicalEvent(MagicalEvent event) {

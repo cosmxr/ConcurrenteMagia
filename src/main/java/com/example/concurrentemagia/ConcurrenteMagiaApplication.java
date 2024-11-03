@@ -28,6 +28,7 @@ public class ConcurrenteMagiaApplication {
     private void resetMagicalEvents() {
         MagicalEvent wizard = magicalEventService.findById(10L);
         if (wizard != null) {
+            wizard.setName("Wizard");
             wizard.setUserHealth(100); // Reset user health
             wizard.setChallengerHealth(100); // Reset challenger health
             wizard.setTurn(1); // Reset turn counter
@@ -38,6 +39,7 @@ public class ConcurrenteMagiaApplication {
         }
         MagicalEvent troll = magicalEventService.findById(8L);
         if (troll != null) {
+            troll.setName("Troll");
             troll.setUserHealth(100); // Reset user health
             troll.setChallengerHealth(200); // Reset challenger health
             troll.setTurn(1); // Reset turn counter
@@ -48,6 +50,7 @@ public class ConcurrenteMagiaApplication {
         }
         MagicalEvent dragon = magicalEventService.findById(9L);
         if (dragon != null) {
+            dragon.setName("Dragon");
             dragon.setUserHealth(100); // Reset user health
             dragon.setChallengerHealth(300); // Reset challenger health
             dragon.setTurn(1); // Reset turn counter
