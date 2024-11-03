@@ -19,11 +19,13 @@ public class MagicalEventService {
         this.spellRepository = spellRepository;
     }
 
+    //guarda eventos magicos
     public void save(MagicalEvent event) {
         validateMagicalEvent(event);
         magicalEventRepository.save(event);
     }
 
+    //buca eventos por id
     public MagicalEvent findById(Long id) {
         return magicalEventRepository.findById(id).orElse(null);
     }
@@ -33,11 +35,12 @@ public class MagicalEventService {
     public List<MagicalEvent> getAllEvents() {
         return magicalEventRepository.findAll();
     }
-
+//recoge el evento actual
     public MagicalEvent getCurrentEvent() {
        return findById(10L);
     }
 
+    //interaccion de hechizos por turnos
     public String applySpell(MagicalEvent event, Spell spell) {
         if (event.getTurn() % 2 == 0) { // User's turn
             switch (spell.getType()) {
@@ -53,7 +56,7 @@ public class MagicalEventService {
                 default:
                     break;
             }
-        } else { // Challenger's turn
+        } else { // turno del oponente
             event.setUserHealth(event.getUserHealth() - event.getAttackPoints());
         }
         event.setTurn(event.getTurn() + 1);
@@ -66,7 +69,7 @@ public class MagicalEventService {
             save(event);
             return "victory";
         } else if (event.getUserHealth() <= 0) {
-            event.setLevel(-1); // Indicate defeat
+            event.setLevel(-1); // derrota
             save(event);
             return "defeat";
         }
@@ -74,28 +77,28 @@ public class MagicalEventService {
         save(event);
         return "challenge";
     }
-
+//se avanza al siguiente nivel cuando ya se derrota al enemigo
     private void advanceToNextLevel(MagicalEvent event) {
         switch (event.getLevel()) {
             case 1:
                 event.setLevel(2);
-                event.setChallengerHealth(200); // Reset health for the next challenger
+                event.setChallengerHealth(200);
                 event.setName("Troll");
                 break;
             case 2:
                 event.setLevel(3);
-                event.setChallengerHealth(300); // Reset health for the next challenger
+                event.setChallengerHealth(300);
                 event.setName("Dragon");
                 break;
             case 3:
-                event.setLevel(4); // Indicate final victory
+                event.setLevel(4); // victoria final
                 break;
             default:
                 break;
         }
         event.setTurn(1);
     }
-
+ //validacion de evento magico
     private void validateMagicalEvent(MagicalEvent event) {
         if (event.getName() == null || event.getName().isEmpty()) {
             throw new IllegalArgumentException("Event name cannot be empty");

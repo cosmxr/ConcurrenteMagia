@@ -29,34 +29,34 @@ public class ConcurrenteMagiaApplication {
         MagicalEvent wizard = magicalEventService.findById(10L);
         if (wizard != null) {
             wizard.setName("Wizard");
-            wizard.setUserHealth(100); // Reset user health
-            wizard.setChallengerHealth(100); // Reset challenger health
-            wizard.setTurn(1); // Reset turn counter
-            wizard.setLevel(1); // Set level to 1
-            wizard.setDefensePercentage(15); // Set defense percentage to 15
-            wizard.setAttackPoints(10); // Set attack points to 10
+            wizard.setUserHealth(100); // Vida jugador
+            wizard.setChallengerHealth(100); // Vida oponente
+            wizard.setTurn(1); // contador de turnos
+            wizard.setLevel(1); // nivel de desafio
+            wizard.setDefensePercentage(15); // Porcentaje de defensa
+            wizard.setAttackPoints(10); // Puntos de ataque
             magicalEventService.save(wizard);
         }
         MagicalEvent troll = magicalEventService.findById(8L);
         if (troll != null) {
             troll.setName("Troll");
-            troll.setUserHealth(100); // Reset user health
-            troll.setChallengerHealth(200); // Reset challenger health
-            troll.setTurn(1); // Reset turn counter
-            troll.setLevel(2); // Set level to 1
-            troll.setDefensePercentage(25); // Set defense percentage to 15
-            troll.setAttackPoints(20); // Set attack points to 10
+            troll.setUserHealth(100);
+            troll.setChallengerHealth(200);
+            troll.setTurn(1);
+            troll.setLevel(2);
+            troll.setDefensePercentage(25);
+            troll.setAttackPoints(20);
             magicalEventService.save(troll);
         }
         MagicalEvent dragon = magicalEventService.findById(9L);
         if (dragon != null) {
             dragon.setName("Dragon");
-            dragon.setUserHealth(100); // Reset user health
-            dragon.setChallengerHealth(300); // Reset challenger health
-            dragon.setTurn(1); // Reset turn counter
-            dragon.setLevel(3); // Set level to 1
-            dragon.setDefensePercentage(35); // Set defense percentage to 15
-            dragon.setAttackPoints(30); // Set attack points to 10
+            dragon.setUserHealth(100);
+            dragon.setChallengerHealth(300);
+            dragon.setTurn(1);
+            dragon.setLevel(3);
+            dragon.setDefensePercentage(35);
+            dragon.setAttackPoints(30);
             magicalEventService.save(dragon);
         }
     }

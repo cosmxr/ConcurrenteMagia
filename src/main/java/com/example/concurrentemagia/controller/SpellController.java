@@ -2,7 +2,9 @@ package com.example.concurrentemagia.controller;
 
 import com.example.concurrentemagia.model.Spell;
 import com.example.concurrentemagia.service.SpellService;
+import com.example.concurrentemagia.service.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -18,8 +20,9 @@ public class SpellController {
     private SpellService spellService;
 
     @GetMapping
-    public String listSpells(Model model) {
-        List<Spell> spells = spellService.findAll();
+    public String listSpells(Model model, Authentication authentication) {
+        Long userId = ((UserDetailsImpl) authentication.getPrincipal()).getId();
+        List<Spell> spells = spellService.findAllByUserId(userId);
         model.addAttribute("spells", spells);
         return "spells";
     }
@@ -31,7 +34,9 @@ public class SpellController {
     }
 
     @PostMapping
-    public String saveSpell(@ModelAttribute Spell spell) {
+    public String saveSpell(@ModelAttribute Spell spell, Authentication authentication) {
+        Long userId = ((UserDetailsImpl) authentication.getPrincipal()).getId();
+        spell.setUserId(userId != null ? userId : 0L);
         spellService.save(spell);
         return "redirect:/spells";
     }

@@ -14,12 +14,16 @@ public class Spell {
     private int attackDamage;
     private int defensePercentage;
     private int healingAmount;
-    private int attackBoost; // Ensure this field is present
+    private int attackBoost;
 
     @Enumerated(EnumType.STRING)
     private SpellType type;
 
     // Getters and Setters
+
+    @Column(nullable = true)
+    private Long userId;
+
     public Long getId() {
         return id;
     }
@@ -82,5 +86,12 @@ public class Spell {
 
     public void setType(SpellType type) {
         this.type = type;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+    public void setUserId(long userId){
+        this.userId = userId;
     }
 }

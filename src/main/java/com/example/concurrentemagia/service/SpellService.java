@@ -21,16 +21,18 @@ public class SpellService {
         this.magicalEventRepository = magicalEventRepository;
     }
 
-    public List<Spell> findAll() {
-        return spellRepository.findAll();
+    public List<Spell> findAllByUserId(Long userId) {
+        return spellRepository.findByUserId(userId); // Buscar hechizos por userId
     }
 
+    //guarda hechizos
     public Spell save(Spell spell) {
         assignRandomValues(spell);
         validateSpell(spell);
         return spellRepository.save(spell);
     }
 
+    //elimina hechizos
     public void deleteById(Long id) {
         Spell spell = spellRepository.findById(id).orElse(null);
         if (spell != null) {
@@ -43,27 +45,29 @@ public class SpellService {
         }
     }
 
+    //filtra hechizos por usuario
     public Spell findById(Long spellId) {
         return spellRepository.findById(spellId).orElse(null);
     }
-
+//asigna valor random a los hechizos
     private void assignRandomValues(Spell spell) {
         switch (spell.getType()) {
             case ATTACK:
-                spell.setAttackDamage(random.nextInt(20) + 10); // Attack damage between 10 and 30
+                spell.setAttackDamage(random.nextInt(20) + 10); // 10 a 30
                 break;
             case HEALING:
-                spell.setHealingAmount(random.nextInt(20) + 10); // Healing amount between 10 and 30
+                spell.setHealingAmount(random.nextInt(20) + 10); // curacion entre 10 y 30
                 break;
             case DEFENSE:
-                spell.setDefensePercentage(random.nextInt(50) + 10); // Defense percentage between 10% and 60%
-                spell.setAttackBoost(random.nextInt(10) + 5); // Attack boost between 5 and 15
+                spell.setDefensePercentage(random.nextInt(50) + 10); //defensa entre 10 60
+                spell.setAttackBoost(random.nextInt(10) + 5); // boost de ataque entre 5 y 15
                 break;
             default:
                 break;
         }
     }
 
+    // validacion de hechizo, excepciones
     private void validateSpell(Spell spell) {
         if (spell.getName() == null || spell.getName().isEmpty()) {
             throw new IllegalArgumentException("Spell name cannot be empty");

@@ -4,7 +4,9 @@ import com.example.concurrentemagia.model.MagicalEvent;
 import com.example.concurrentemagia.model.Spell;
 import com.example.concurrentemagia.service.MagicalEventService;
 import com.example.concurrentemagia.service.SpellService;
+import com.example.concurrentemagia.service.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -20,9 +22,10 @@ public class MagicalEventController {
     private SpellService spellService;
 
     @GetMapping("/new")
-    public String newEventForm(Model model) {
+    public String newEventForm(Model model, Authentication authentication) {
+        Long userId = ((UserDetailsImpl) authentication.getPrincipal()).getId();
         model.addAttribute("event", new MagicalEvent());
-        model.addAttribute("spells", spellService.findAll());
+        model.addAttribute("spells", spellService.findAllByUserId(userId));
         return "event-form";
     }
 
@@ -33,9 +36,10 @@ public class MagicalEventController {
     }
 
     @GetMapping("/challenge")
-    public String challenge(Model model) {
+    public String challenge(Model model,Authentication authentication) {
+        Long userId = ((UserDetailsImpl) authentication.getPrincipal()).getId();
         model.addAttribute("event", magicalEventService.getCurrentEvent());
-        model.addAttribute("spells", spellService.findAll());
+        model.addAttribute("spells", spellService.findAllByUserId(userId));
         return "challenge";
     }
 

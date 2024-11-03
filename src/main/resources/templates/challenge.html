@@ -1,25 +1,66 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Challenge</title>
+    <title>Use Spell</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; }
+        h1 { color: #333; }
+        .container { max-width: 800px; margin: 0 auto; }
+        .btn { padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background-color: #f2f2f2; }
+        tr:hover { background-color: #f1f1f1; }
+    </style>
 </head>
 <body>
-<h1>Evento Mágico</h1>
-<div th:if="${event != null}">
-    <h2 th:text="${event.name}">Nombre Evento</h2>
-    <p th:text="${event.description}">Descripción Evento</p>
-    <p>Salud Oponente: <span th:text="${event.challengerHealth}">100</span></p>
-    <p>Salud Jugador: <span th:text="${event.userHealth}">100</span></p>
-    <div>
-        <h3>Hechizos</h3>
-        <div th:each="spell : ${spells}">
-            <form th:action="@{/events/useSpell}" method="post">
-                <input type="hidden" name="spellId" th:value="${spell.id}"/>
-                <input type="hidden" name="eventId" th:value="${event.id}"/>
-                <button type="submit" th:text="${spell.name}">Spell Name</button>
-            </form>
-        </div>
-    </div>
+<div class="container">
+    <h1>Use Spell</h1>
+    <h2>Current Event</h2>
+    <p><strong>Name:</strong> <span th:text="${event.name}">Event Name</span></p>
+    <p><strong>Description:</strong> <span th:text="${event.description}">Event Description</span></p>
+    <p><strong>Challenger Health:</strong> <span th:text="${event.challengerHealth}">0</span></p>
+    <p><strong>User Health:</strong> <span th:text="${event.userHealth}">0</span></p>
+    <p><strong>Level:</strong> <span th:text="${event.level}">0</span></p>
+    <p><strong>Turn:</strong> <span th:text="${event.turn}">0</span></p>
+
+    <h2>Available Spells</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Type</th>
+            <th>Parameters</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="spell : ${spells}">
+            <td th:text="${spell.name}">Spell Name</td>
+            <td th:text="${spell.description}">Spell Description</td>
+            <td th:text="${spell.type}">Spell Type</td>
+            <td>
+                <span th:if="${spell.type == T(com.example.concurrentemagia.model.SpellType).ATTACK}">
+                    Attack Damage: <span th:text="${spell.attackDamage}">0</span>
+                </span>
+                <span th:if="${spell.type == T(com.example.concurrentemagia.model.SpellType).HEALING}">
+                    Healing Amount: <span th:text="${spell.healingAmount}">0</span>
+                </span>
+                <span th:if="${spell.type == T(com.example.concurrentemagia.model.SpellType).DEFENSE}">
+                    Defense Percentage: <span th:text="${spell.defensePercentage}">0</span>,
+                    Attack Boost: <span th:text="${spell.attackBoost}">0</span>
+                </span>
+            </td>
+            <td>
+                <form th:action="@{/events/useSpell}" method="post">
+                    <input type="hidden" name="spellId" th:value="${spell.id}"/>
+                    <button type="submit">Use Spell</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </div>
 </body>
 </html>
