@@ -18,12 +18,14 @@
 <div class="container">
   <h1>Hechizos</h1>
   <a class="btn" th:href="@{/spells/new}">Añadir nuevo hechizo</a>
+  <a class="btn" th:href="@{/events/challenge}">Desafío</a>
   <table>
     <thead>
     <tr>
       <th>Nombre</th>
       <th>Descripción</th>
       <th>Tipo</th>
+      <th>Parámetros</th>
       <th>Acciones</th>
     </tr>
     </thead>
@@ -32,6 +34,18 @@
       <td th:text="${spell.name}">Introduce nombre</td>
       <td th:text="${spell.description}">Introduce descripción</td>
       <td th:text="${spell.type}">Introduce tipo</td>
+      <td>
+        <span th:if="${spell.type == T(com.example.concurrentemagia.model.SpellType).ATTACK}">
+          Daño de ataque: <span th:text="${spell.attackDamage}">0</span>
+        </span>
+        <span th:if="${spell.type == T(com.example.concurrentemagia.model.SpellType).HEALING}">
+          Curación: <span th:text="${spell.healingAmount}">0</span>
+        </span>
+        <span th:if="${spell.type == T(com.example.concurrentemagia.model.SpellType).DEFENSE}">
+          Porcentaje de defensa: <span th:text="${spell.defensePercentage}">0</span>,
+          Boost de ataque: <span th:text="${spell.attackBoost}">0</span>
+        </span>
+      </td>
       <td class="actions">
         <a th:href="@{/spells/delete/{id}(id=${spell.id})}">Borrar</a>
       </td>

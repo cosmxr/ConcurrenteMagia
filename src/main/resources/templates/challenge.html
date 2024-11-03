@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Challenge</title>
+</head>
+<body>
+<h1>Magical Event</h1>
+<div th:if="${event != null}">
+    <h2 th:text="${event.name}">Event Name</h2>
+    <p th:text="${event.description}">Event Description</p>
+    <p>Challenger Health: <span th:text="${event.challengerHealth}">100</span></p>
+    <p>User Health: <span th:text="${event.userHealth}">100</span></p>
+    <div>
+        <h3>Spells</h3>
+        <div th:each="spell : ${spells}">
+            <form th:action="@{/events/useSpell}" method="post">
+                <input type="hidden" name="spellId" th:value="${spell.id}"/>
+                <input type="hidden" name="eventId" th:value="${event.id}"/>
+                <button type="submit" th:text="${spell.name}">Spell Name</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
