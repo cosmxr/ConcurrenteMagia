@@ -14,11 +14,22 @@ public class MagicalEvent {
     private String description;
     private int challengerHealth;
     private int userHealth;
+    private int level = 0;
+    private int attackPoints = 0; // Default value
+    private int defensePercentage = 0;
+    private int turn = 1;
 
     @ManyToMany
     private List<Spell> spells;
 
     // Getters and Setters
+    public int getTurn() {
+        return turn;
+    }
+
+    public void setTurn(int turn) {
+        this.turn = turn;
+    }
     public Long getId() {
         return id;
     }
@@ -57,6 +68,30 @@ public class MagicalEvent {
 
     public void setUserHealth(int userHealth) {
         this.userHealth = userHealth;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public int getAttackPoints() {
+        return attackPoints;
+    }
+
+    public void setAttackPoints(int attackPoints) {
+        this.attackPoints = attackPoints;
+    }
+
+    public int getDefensePercentage() {
+        return defensePercentage;
+    }
+
+    public void setDefensePercentage(int defensePercentage) {
+        this.defensePercentage = defensePercentage;
     }
 
     public List<Spell> getSpells() {

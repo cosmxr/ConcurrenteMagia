@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+// src/main/java/com/example/concurrentemagia/controller/MagicalEventController.java
 
 @Controller
 @RequestMapping("/events")
@@ -33,23 +33,20 @@ public class MagicalEventController {
         magicalEventService.save(event);
         return "redirect:/events";
     }
-
     @GetMapping("/challenge")
     public String challenge(Model model) {
-        MagicalEvent event = magicalEventService.getRandomEvent();
-        List<Spell> spells = spellService.findAll();
-        model.addAttribute("event", event);
-        model.addAttribute("spells", spells);
+        model.addAttribute("event", magicalEventService.getCurrentEvent());
+        model.addAttribute("spells", spellService.findAll());
         return "challenge";
     }
 
     @PostMapping("/useSpell")
-    public String useSpell(@RequestParam Long spellId, @RequestParam Long eventId, Model model) {
+    public String useSpell(@RequestParam Long spellId, Model model) {
         Spell spell = spellService.findById(spellId);
-        MagicalEvent event = magicalEventService.findById(eventId);
+        MagicalEvent event = magicalEventService.getCurrentEvent();
         magicalEventService.applySpell(event, spell);
         model.addAttribute("event", event);
         model.addAttribute("spells", spellService.findAll());
-        return "challenge";
+        return "challenge"; // Return to the challenge view
     }
 }

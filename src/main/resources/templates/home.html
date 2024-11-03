@@ -3,102 +3,40 @@
 <head>
     <title>Home</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f9f9f9;
-        }
-
-        h1 {
-            color: #333;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-
-        .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            font-size: 16px;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .btn:hover {
-            background-color: #45a049;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        th, td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #f2f2f2;
-            color: #333;
-        }
-
-        tr:hover {
-            background-color: #f9f9f9;
-        }
-
-        .actions a {
-            color: #f44336;
-            text-decoration: none;
-            font-weight: bold;
-            margin-right: 10px;
-        }
-
-        .actions a:hover {
-            color: #d32f2f;
-        }
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; }
+        h1, h2, h3 { color: #333; }
+        .container { max-width: 800px; margin: 0 auto; }
+        .section { margin-bottom: 20px; }
+        .section p { margin: 10px 0; }
+        .btn { padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px; display: inline-block; }
     </style>
 </head>
 <body>
 <div class="container">
-    <h1>Manejador de Hechizos</h1>
-    <a class="btn" th:href="@{/spells/new}">Añade un nuevo hechizo</a>
-    <table>
-        <thead>
-        <tr>
-            <th>Nombre</th>
-            <th>Descripción</th>
-            <th>Tipo</th>
-            <th>Acciones</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="spell : ${spells}">
-            <td th:text="${spell.name}">Nombre hechizo</td>
-            <td th:text="${spell.description}">Descripción hechizo</td>
-            <td th:text="${spell.type}">Tipo de hechizo</td>
-            <td class="actions">
-                <a th:href="@{/spells/delete/{id}(id=${spell.id})}">Borrar</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+    <h1>Welcome to Concurrente Magia</h1>
+    <div class="section">
+        <h2>About the Game</h2>
+        <p>Concurrente Magia is a magical adventure game where you face various challengers in different levels. Each level increases in difficulty, and you must use your spells wisely to defeat your opponents.</p>
+    </div>
+    <div class="section">
+        <h2>Spells</h2>
+        <p>There are three types of spells you can use:</p>
+        <ul>
+            <li><strong>Attack Spells:</strong> These spells deal damage to your opponent.</li>
+            <li><strong>Defense Spells:</strong> These spells increase your defense percentage and can boost your attack.</li>
+            <li><strong>Healing Spells:</strong> These spells restore your health.</li>
+        </ul>
+    </div>
+    <div class="section">
+        <h2>Magical Event Levels</h2>
+        <p>As you progress through the game, you will encounter different challengers:</p>
+        <ul>
+            <li><strong>Level 1:</strong> Duel with a wizard. Challenger Health: 100, Attack Points: 10, Defense Percentage: 10.</li>
+            <li><strong>Level 2:</strong> Battle with a troll. Challenger Health: 200, Attack Points: 20, Defense Percentage: 20.</li>
+            <li><strong>Level 3:</strong> Fight a dragon. Challenger Health: 300, Attack Points: 30, Defense Percentage: 30.</li>
+        </ul>
+    </div>
+    <a class="btn" th:href="@{/spells}">Next</a>
 </div>
 </body>
 </html>
